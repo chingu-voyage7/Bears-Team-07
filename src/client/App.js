@@ -1,18 +1,16 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
-import SecondPage from "./SecondPage";
+import './App.css';
+import LandingPage from './Components/LandingPage/Index'
+
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Hey there!!</h1>
+      <div className='pink'>
         <Router>
-          <SecondPage path="second" />
+          <LandingPage path="/" />
         </Router>
-        <Link to="second">
-          <p>Second Page</p>
-        </Link>
       </div>
     );
   }
