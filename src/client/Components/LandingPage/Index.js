@@ -46,20 +46,27 @@ const Button = styled.button`
 `
 
 const Section = styled.section`
-    text-align: center;
     margin: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 `;
 
 const Image = styled.img`
-    width: 50%;
-    margin: 2rem auto;
+    max-width: 45%;
     @media (max-width: 800px) {
-        width: 100%;
+        max-width: 90%;
+        margin: auto;
     }
 `;
 
-const Text = styled.div`
+const Text = styled.span`
+    max-width: 45%;
     padding: 0 1.3rem;
+    @media (max-width: 800px) {
+        max-width: 90%;
+        margin: auto;
+    }
 `;
 
 let randArr = [0, 1, 2, 3, 4, 5, 6, 7];     // TODO: Remove this on a later date
@@ -76,17 +83,22 @@ class LandingPage extends React.Component {
                     <Button>DEMO</Button>
                     <Button>SIGNUP</Button>
                 </Hero>
-                {
-                    randArr.map(val => 
-                    <Section>
-                        <Image src="https://dnote.io/dist/8d3b92e8d84468d414d7b2ea33915eb0.png"/>
-                        <Text>
-                            <Title>Hey You</Title>
-                            <SubTitle>Nothing here actually. Just another subtitle. And some Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia laboriosam veritatis exercitationem corrupti saepe. Provident culpa optio fugit quos voluptate minus cum fuga. Laboriosam nam, reprehenderit recusandae officia debitis sint!</SubTitle>
-                            <Button>GO SOMEWHERE</Button>
-                        </Text>
-                    </Section>)
-                }
+                <Section>
+                    <Image src="https://dnote.io/dist/8d3b92e8d84468d414d7b2ea33915eb0.png"/>
+                    <Text>
+                        <Title>Hey You</Title>
+                        <SubTitle>Nothing here actually. Just another subtitle. And some Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia laboriosam veritatis exercitationem corrupti saepe. Provident culpa optio fugit quos voluptate minus cum fuga. Laboriosam nam, reprehenderit recusandae officia debitis sint!</SubTitle>
+                        <Button>GO SOMEWHERE</Button>
+                    </Text>
+                </Section>)
+                <Section>
+                    <Text>
+                        <Title>Hey You</Title>
+                        <SubTitle>Nothing here actually. Just another subtitle. And some Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia laboriosam veritatis exercitationem corrupti saepe. Provident culpa optio fugit quos voluptate minus cum fuga. Laboriosam nam, reprehenderit recusandae officia debitis sint!</SubTitle>
+                        <Button>GO SOMEWHERE</Button>
+                    </Text>
+                    <Image src="https://dnote.io/dist/8d3b92e8d84468d414d7b2ea33915eb0.png"/>
+                </Section>)
             </div>
         )
     }
