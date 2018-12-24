@@ -1,7 +1,8 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
-import LandingPage from './Components/LandingPage/Index'
-
+import LandingPage from "./Components/LandingPage/Index";
+import Demo from "./Components/demo/Demo";
+import Notebook from "./Components/demo/Notebook";
 
 class App extends React.Component {
   render() {
@@ -9,6 +10,8 @@ class App extends React.Component {
       <div>
         <Router>
           <LandingPage path="/" />
+          <Demo path="/demo" />
+          <Notebook path="demo/notebook" />
         </Router>
       </div>
     );
