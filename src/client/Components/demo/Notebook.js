@@ -35,8 +35,7 @@ class Notebook extends React.Component {
     });
   };
 
-  handleSubmitForm = event => {
-    event.preventDefault();
+  handleSubmitForm = () => {
     this.resetVisible();
     this.setState({
       pageCount: this.state.pageCount + 1
