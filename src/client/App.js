@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Link } from "@reach/router";
+import { Router } from "@reach/router";
 import LandingPage from "./Components/LandingPage/Index";
 import Demo from "./Components/demo/Demo";
 import Notebook from "./Components/demo/Notebook";

@@ -1,10 +1,9 @@
 import React from "react";
-import Notebook from "./Notebook";
+import { navigate } from "@reach/router";
 
 class Demo extends React.Component {
   state = {
-    title: "",
-    notebookCreated: false
+    title: ""
   };
 
   handleChange = event => {
@@ -14,34 +13,30 @@ class Demo extends React.Component {
   };
 
   handleClick = () => {
-    if (this.state.title !== "") {
-      this.setState({
-        notebookCreated: true
-      });
+    let { title } = this.state;
+    if (title !== "") {
+      navigate("demo/notebook", { state: { title: title } });
     }
   };
 
   render() {
-    let { notebookCreated, title } = this.state;
-    if (notebookCreated === false) {
-      return (
-        <div>
-          <p>Create new Notebook</p>
-          <form>
-            <label htmlFor="notebook-name">Enter Notebook Subject:</label>
-            <input
-              id="notebook-name"
-              placeholder="Enter Title"
-              value={title}
-              onChange={this.handleChange}
-            />
-          </form>
-          <button onClick={this.handleClick}>Save</button>
-        </div>
-      );
-    } else {
-      return <Notebook title={title} />;
-    }
+    let { title } = this.state;
+
+    return (
+      <div>
+        <p>Create new Notebook</p>
+        <form>
+          <label htmlFor="notebook-name">Enter Notebook Subject:</label>
+          <input
+            id="notebook-name"
+            placeholder="Enter Title"
+            value={title}
+            onChange={this.handleChange}
+          />
+        </form>
+        <button onClick={this.handleClick}>Save</button>
+      </div>
+    );
   }
 }
 
