@@ -1,20 +1,29 @@
 import React from "react";
 import NotePage from "./NotePage";
+import ViewNotebook from "./ViewNotebook";
 import ViewNotes from "./ViewNotes";
+import ViewFlashCards from "./ViewFlashcards";
 
 class Notebook extends React.Component {
   state = {
-    noteAdded: false,
-    noteSaved: false,
+    title: this.props.location.state.title,
+    visible: 1,
     pageCount: 0,
+    flashcards: false,
     notebook: [
       { title: "", questionAnswer: [{ ques: "", ans: "" }], summary: "" }
     ]
   };
 
+  resetVisible = () => {
+    this.setState({
+      visible: 1
+    });
+  };
+
   handleNoteAdded = () => {
     this.setState({
-      noteAdded: true
+      visible: 2
     });
   };
   handleAddNotes = () => {
@@ -27,11 +36,11 @@ class Notebook extends React.Component {
   };
 
   handleSubmitForm = event => {
-    this.setState({
-      pageCount: this.state.pageCount + 1,
-      noteSaved: true
-    });
     event.preventDefault();
+    this.resetVisible();
+    this.setState({
+      pageCount: this.state.pageCount + 1
+    });
   };
 
   handleChange = () => {
@@ -48,35 +57,54 @@ class Notebook extends React.Component {
     }
   };
 
+  handleViewNotes = () => {
+    this.setState({
+      visible: 3
+    });
+  };
+
+  handleCreateFlashCards = () => {
+    this.setState({
+      flashcards: true,
+      visible: 4
+    });
+  };
+
   render() {
-    const title = this.props.title;
-    let { noteAdded, pageCount, noteSaved } = this.state;
-    if (noteSaved === true) {
-      return (
-        <div>
-          <ViewNotes />
-        </div>
-      );
-    }
-    if (noteAdded === false) {
-      return (
-        <div>
-          <p>Hi I am just a notebook called {title}</p>
-          <button onClick={this.handleNoteAdded}>Add Page</button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <NotePage
-            notebookData={this.state.notebook[pageCount]}
-            controlFunc={this.handleChange}
-            submitFormFunc={this.handleSubmitForm}
-            addNotesFunc={this.handleAddNotes}
+    let { title, visible, pageCount, notebook, flashcards } = this.state;
+    return (
+      <div>
+        {visible === 1 && (
+          <ViewNotebook
+            pageCount={pageCount}
+            title={title}
+            flashcards={flashcards}
+            addNoteHandler={this.handleNoteAdded}
+            viewNotesHandler={this.handleViewNotes}
+            createFlashCardHandler={this.handleCreateFlashCards}
+            ViewFlashCardHandler={this.handleCreateFlashCards}
           />
-        </div>
-      );
-    }
+        )}
+        {visible === 2 && (
+          <NotePage
+            notebookData={notebook[pageCount]}
+            controlFunc={this.handleChange}
+            addNotesFunc={this.handleAddNotes}
+            submitFormFunc={this.handleSubmitForm}
+          />
+        )}
+        {visible === 3 && (
+          <ViewNotes notebook={notebook} backHandler={this.resetVisible} />
+        )}
+        {visible === 4 && (
+          <ViewFlashCards
+            notebook={notebook}
+            title={title}
+            backHandler={this.resetVisible}
+          />
+        )}
+      </div>
+    );
   }
 }
 
